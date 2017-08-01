@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
 
@@ -10,7 +11,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: './',
     filename: '[name].bundle.js'
   },
 
@@ -68,6 +69,11 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
     })
   ])
 }
