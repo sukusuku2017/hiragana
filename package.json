@@ -6,7 +6,12 @@
   "author": "Gim YoungPhil <youngphil.gim@gmail.com>",
   "license": "MIT",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf dist",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "prebuild": "yarn run clean",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
   "dependencies": {
     "vue": "^2.4.2"
   },
@@ -14,6 +19,10 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.4",
+    "vue-loader": "^13.0.2",
+    "vue-template-compiler": "^2.4.2",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   }
