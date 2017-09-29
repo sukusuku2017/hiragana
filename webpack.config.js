@@ -11,7 +11,6 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: './',
     filename: '[name].bundle.js'
   },
 
@@ -24,6 +23,12 @@ module.exports = {
 
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.vue$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
@@ -43,7 +48,15 @@ module.exports = {
     ]
   },
 
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    })
+  ],
+
   devServer: {
+    contentBase: './dev',
     historyApiFallback: true,
     noInfo: true
   },
@@ -66,14 +79,6 @@ if (process.env.NODE_ENV === 'production') {
       compress: {
         warnings: false
       }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    }),
-
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      inject: true
     })
   ])
 }
